@@ -1,0 +1,46 @@
+PUT _ingest/pipeline/news-pipeline
+{
+    "processors": [
+      {
+        "remove": {
+          "field": [
+            "host",
+            "message",
+            "log",
+            "@version"
+          ],
+          "ignore_missing": true
+        }
+      },
+      {
+        "inference": {
+          "model_id": "elastic__distilbert-base-uncased-finetuned-conll03-english",
+          "target_field": "ml.ner",
+          "field_map": {
+            "title": "text_field"
+          }
+        }
+      },
+      {
+        "script": {
+          "lang": "painless",
+          "if": "return ctx['ml']['ner'].containsKey('entities')",
+          "source": "Map tags = new HashMap(); for (item in ctx['ml']['ner']['entities']) { if (!tags.containsKey(item.class_name)) tags[item.class_name] = new HashSet(); tags[item.class_name].add(item.entity);} ctx['tags'] = tags;"
+        }
+      },
+      {
+        "inference": {
+          "model_id": ".elser_model_2",
+          "target_field": "ml-elsr",
+          "field_map": {
+            "title": "text_field"
+          },
+          "inference_config": {
+            "text_expansion": {
+              "results_field": "tokens"
+            }
+          }
+        }
+      }
+    ]
+  }
