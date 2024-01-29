@@ -3,7 +3,8 @@ PUT bbc-news-elser
     "mappings": {
       "_source": {
         "excludes": [
-          "ml-elsr.tokens"
+          "ml-elser-title.tokens",
+          "ml-elser-description.tokens"
         ]
       },
       "properties": {
@@ -98,7 +99,23 @@ PUT bbc-news-elser
             }
           }
         },
-        "ml-elsr": {
+        "ml-elser-description": {
+          "properties": {
+            "model_id": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "tokens": {
+              "type": "rank_features"
+            }
+          }
+        },
+        "ml-elser-title": {
           "properties": {
             "model_id": {
               "type": "text",
