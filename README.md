@@ -4,6 +4,7 @@
 - Docker installed
 - Cloud Cluster w/ sufficient ML capacity
 
+## Steps
 1. Download the bbc news csv from: https://www.kaggle.com/datasets/gpreda/bbc-news
 
 Unzip the file. The Logstash configuration assumes a particcular data structure, so minor tweaks need to be made to the structure of the file. 
