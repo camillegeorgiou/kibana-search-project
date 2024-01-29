@@ -31,9 +31,23 @@ PUT _ingest/pipeline/news-pipeline
       {
         "inference": {
           "model_id": ".elser_model_2",
-          "target_field": "ml-elsr",
+          "target_field": "ml-elser-title",
           "field_map": {
             "title": "text_field"
+          },
+          "inference_config": {
+            "text_expansion": {
+              "results_field": "tokens"
+            }
+          }
+        }
+      },
+      {
+        "inference": {
+          "model_id": ".elser_model_2",
+          "target_field": "ml-elser-description",
+          "field_map": {
+            "description": "text_field"
           },
           "inference_config": {
             "text_expansion": {
