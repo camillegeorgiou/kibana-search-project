@@ -4,6 +4,10 @@
 - Docker installed
 - Cloud Cluster w/ sufficient ML capacity
 
+## Setting up
+- Clone down the repository 
+- Run pip install -r requirements.txt 
+
 ## Steps
 1. Download the bbc news csv from: https://www.kaggle.com/datasets/gpreda/bbc-news
 

@@ -9,7 +9,7 @@ password = os.getenv("PASSWORD")
 
 es = Elasticsearch(
     cloud_id=cloud_id,
-    http_auth=(username, password),
+    basic_auth=(username, password),
 )
 
 def main():
